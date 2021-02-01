@@ -18,6 +18,8 @@ public class HelloProcessing2 extends PApplet
 	{	
 		background(0);
 		stroke(255);
-		line(10, 10, 100, 100);
+		line(10, 10, 200, 200);
+		ellipse(200, 200, 100, 50);
+		rect(20, 100, 70, 90);
 	}
 }
