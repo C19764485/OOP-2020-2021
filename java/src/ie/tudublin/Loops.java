@@ -20,7 +20,9 @@ public class Loops extends PApplet {
         // number key pressed
         if (keyCode >= '0' && keyCode <= '9')
             mode = keyCode - '0';
+        
     }
+    
 
     public void setup() {
         colorMode(HSB);
@@ -31,7 +33,47 @@ public class Loops extends PApplet {
         switch (mode)
         {
             case 0:
-                ellipse(cx, cy, 100, 100);
+                noStroke();
+                fill(240, 80, 255);
+                if (mouseX < cx) {
+                    rect(0, 0, cx, height);
+                }
+                else {
+                    rect(cx, 0, cx, height);
+                }
+                break;    
+            case 1:
+                if (mouseX < cx && mouseY < cy) {
+                    rect(0,0, cx,cy);
+
+                }
+                else if (mouseX >cx && mouseY < cy){
+                    rect(cx,0, cx,cy);
+                }
+                else if (mouseX <cx && mouseY > cy){
+                    rect(0,cy, cx,cy);
+                }
+                else {
+                    rect(cx,cy, cx,cy);
+                }
+                break;    
+            case 2:
+                int numRects = (int)(mouseX / 10.0f);
+                float w = width / (float) numRects;
+                float cgap = 255 / (float) numRects;
+                for(int i = 0; i < numRects; i++) {
+                    fill(i * cgap, 255, 255);
+                    rect(i * w, 0, w, height);
+                }
+                break;
+            case 3:
+                int numCircles = (int)(mouseX / 10.0f);
+                float w2 = width / (float) numCircles;
+                float cgap2 = 255 / (float) numCircles;
+                for(int i = 0; i < numCircles; i++) {
+                    fill(i * cgap2, 255, 255);
+                    ellipse(w2 / 2 + (i * w2), cy, w2, w2);
+                }
                 break;
         }
     }
