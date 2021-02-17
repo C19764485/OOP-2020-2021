@@ -181,22 +181,7 @@ public class Arrays extends PApplet {
             break;
             
             case 1: {
-                float border = width * 0.1f;
-                drawAxis(rainfall, months, 12, 120, border);
-                stroke(255, 255, 255);
-        
-                float windowRange = (width - (border * 2.0f));
-                float dataRange = 120;
-                float lineWidth = windowRange / (float) (months.length - 1);
-        
-                float scale = windowRange / dataRange;
-                for (int i = 1; i < rainfall.length; i++) {
-                    float x1 = border + ((i - 1) * lineWidth);
-                    float x2 = border + (i * lineWidth);
-                    float y1 = (height - border) - (rainfall[i - 1]) * scale;
-                    float y2 = (height - border) - (rainfall[i]) * scale;
-                    line(x1, y1, x2, y2);
-                }
+                
             }
             break;
             case 2: {
