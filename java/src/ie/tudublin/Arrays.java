@@ -105,12 +105,12 @@ public class Arrays extends PApplet {
         println("Most rainfall was in " + months[maxIndex] + " with " + rainfall[maxIndex]);
         println("Average rainfall: " + average);
 
-        rect(x, y, w, -h);
+        // rect(x, y, w, -h);
 
         // Draw a bar chart of the rainfall!!
         // Use the map function
 
-        colorMode(RGB);
+        colorMode(HSB);
         float w = width / (float) rainfall.length;
         for (int i = 0; i < rainfall.length; i++) {
             noStroke();
@@ -118,7 +118,6 @@ public class Arrays extends PApplet {
             float x = map(i, 0, rainfall.length, 0, width);
             rect(x, height, w, -rainfall[i]);
         }
-        
     }
 
     public void draw() {
@@ -126,17 +125,41 @@ public class Arrays extends PApplet {
         switch (mode) {
             case 0: {
                 float border = width * 0.1f;
+                stroke(255);
+                colorMode(HSB);
                 line(border, border, border, height - border);
                 line(border, height - border, width - border, height - border);
+                textAlign(CENTER, CENTER);
+                for(float f = 0; f <= 120; f += 10) {
+                    float y = map(f, 0, 120, height - border, border);
+                    line(border - 5, y, border, y);
+                    fill(255);
+                    text((int) f, border / 2, y);
+                }
+                float w = (width - border * 2) / (float) rainfall.length;
+                for(int i = 0; i < rainfall.length; i++) {
+                    float x = map(i, 0, rainfall.length, border, width - border);
+                    // Other way to do it is
+                    //float x = map(i, 0, rainfall.length - 1, border - width, border - w);
+                    float c = map(i, 0 , rainfall.length, 0, 255);
+                    fill(c, 255, 255);
+                    float h = map(rainfall[i], 0, 120, 0, -(height - (border * 2)));
+                    rect(x, height - border - 1, w, h);
+                    fill(255);
+                    text(months[i], x + (w / 2), height - border / 2);
+                }
+                text("Rainfall barchart" , width / 2, border / 2);
+                break;
             }    
-            break;
             
             case 1: {
                 // Trend Line
+                break;
             }
-            break;
+            
             case 2: {
                 // Pie chart
+                break;
             }
         }
     }
