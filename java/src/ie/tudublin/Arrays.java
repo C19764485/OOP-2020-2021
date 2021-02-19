@@ -105,19 +105,19 @@ public class Arrays extends PApplet {
         println("Most rainfall was in " + months[maxIndex] + " with " + rainfall[maxIndex]);
         println("Average rainfall: " + average);
 
-        // rect(x, y, w, -h);
+        rect(x, y, w, -h);
 
         // Draw a bar chart of the rainfall!!
         // Use the map function
 
-        //colorMode(RGB);
-        //float w = width / (float) rainfall.length;
-        //for (int i = 0; i < rainfall.length; i++) {
-        //    noStroke();
-        //    fill(random(255), 255, 255);
-        //    float x = map(i, 0, rainfall.length, 0, width);
-        //    rect(x, height, w, -rainfall[i]);
-        //}
+        colorMode(RGB);
+        float w = width / (float) rainfall.length;
+        for (int i = 0; i < rainfall.length; i++) {
+            noStroke();
+            fill(random(255), 255, 255);
+            float x = map(i, 0, rainfall.length, 0, width);
+            rect(x, height, w, -rainfall[i]);
+        }
         
     }
 
@@ -125,24 +125,14 @@ public class Arrays extends PApplet {
         background(0);
         switch (mode) {
             case 0: {
-                colorMode(RGB);
-                float w = width / (float) rainfall.length;  
                 float border = width * 0.1f;
-                drawAxis(rainfall, months, 12, 120, border);
-                float cGap = 255 / (float) rainfall.length;
-                noStroke();
-                colorMode(HSB);
-                for(int i = 0 ; i < rainfall.length ; i ++)
-                {
-                    float x = i * w;
-                    fill(i * cGap, 255, 255);
-                    rect(x, height * 0.9f, w * 0.9f, -rainfall[i]); // I'm not sure to fix the misalignment
-                }
+                line(border, border, border, height - border);
+                line(border, height - border, width - border, height - border);
             }    
             break;
             
             case 1: {
-                
+                // Trend Line
             }
             break;
             case 2: {
