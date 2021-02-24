@@ -27,6 +27,35 @@ public class Life extends PApplet {
             }
         }
 
+        for (int i = 0; i < col; i++) 
+        {
+            for (int j = 0; j < row; j++) 
+            {
+                //if neighboor is alive or dead
+                boolean state = board[i][j];
+                int neighbours = countNeighbours(row, col);
+
+                if (state == false && neighbours == 3) 
+                {
+                    next[i][j] = state;
+                } 
+                else if (state == true && (neighbours < 2 || neighbours > 3)) 
+                {
+                    next[i][j] = state;
+                } 
+                else 
+                {
+                    next[i][j] = state;
+                }
+
+                //fixed edges
+                if (i == 0 || i == col - 1 || j == 0 || j == row - 1) 
+                {
+                    next[i][j] = board[i][j];
+                }
+            }
+        }
+
         // OR Use 8 if statements
         /*
         if (getCell(board, row-1, col-1))
