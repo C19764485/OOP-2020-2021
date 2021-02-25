@@ -11,7 +11,13 @@ public class Life extends PApplet {
 
     public void clear()
     {
-
+        for(int row = 0 ; row < size ; row ++)
+        {
+            for (int col = 0 ; col < size ; col ++)
+            {
+                setCell(board, row, col, false);
+            }
+        }
     }
 
     public int countNeighbours(int row, int col)
