@@ -81,9 +81,15 @@ public class Main
         processing.core.PApplet.runSketch( a, new StarMap());
     }
 
+    public void helloProcessing2()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new HelloProcessing2());
+    }
+
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.starMap();
+        main.helloProcessing2();
     }
 } 
