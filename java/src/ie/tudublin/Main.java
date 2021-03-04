@@ -66,7 +66,7 @@ public class Main
     public void life()
     {
         String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Life());
+        processing.core.PApplet.runSketch( a, new Life1());
     }
     
     public void colorfulLife()
@@ -80,6 +80,11 @@ public class Main
         String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new StarMap());
     }
+    public void gantt()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Gantt());
+    }
 
     public void helloProcessing2()
     {
@@ -90,6 +95,10 @@ public class Main
     public static void main(String[] args)
     {
         Main main = new Main();
+<<<<<<< HEAD
         main.helloProcessing2();
+=======
+        main.gantt();
+>>>>>>> 503a5fef52173427dd9026ed86e7444486784732
     }
 } 
