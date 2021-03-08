@@ -106,7 +106,7 @@ public class BugZap extends PApplet {
 			if (bugX > width - halfBugWidth) {
 				bugX = width - halfBugWidth;
 			}
-			bugY += 2;
+			bugY += 6;
 		}
 	}
 
@@ -117,6 +117,9 @@ public class BugZap extends PApplet {
 		drawBug(bugX, bugY);
 		moveBug();
 
+		if (bugY == playerY) {
+			text("Game Over", 250, 250);
+		}
 		text("Score: " + score, 20, 20);
 	}
 }
