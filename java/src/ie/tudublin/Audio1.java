@@ -7,25 +7,27 @@ import ddf.minim.Minim;
 import processing.core.PApplet;
 
 public class Audio1 extends PApplet {
+
+    Minim minim; // Connect to minim
+    AudioInput ai; // How to connect to mic
+    AudioPlayer ap;
+    AudioBuffer ab; // Samples
+
     public void settings()
     {
         size(512, 512);
     }
 
-    Minim minim;
-    AudioInput ai;
-    AudioBuffer ab;
-    AudioPlayer ap;
-
     public void setup()
     {
         minim = new Minim(this);
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        //ap = minim.loadFile("music.mp3", width);
-        //ap.play();
-        ab = ai.mix; //Connect buffer to mic
-        //ab = ap.mix;
+        ap = minim.loadFile("scale.wav", width);        
+        // ap.play();
+        ab = ai.mix; // Connect the buffer to mic
+        //ab = ap.mix; // Connect the buffer to the mp3 file
         colorMode(HSB);
+
     }
 
     public void draw()
@@ -34,16 +36,20 @@ public class Audio1 extends PApplet {
         stroke(255);
         float halfHeight = height / 2;
         float average = 0;
-        for(int i = 0; i < ab.size(); i++)
+        float sum = 0;
+        for(int i = 0 ; i < ab.size(); i ++)
         {
-            float c = map(i, 0, ab.size(), 0 ,255);
+            float c = map(i, 0, ab.size(), 0, 255);
             stroke(c, 255, 255);
             line(i, halfHeight - ab.get(i) * halfHeight, i, halfHeight + ab.get(i) * halfHeight);
             //println(ab.get(i));
+            sum += abs(ab.get(i));
         }
 
-        //Calculate the avg amplitude
+        // Calculate the AVERAGE amplitude
+        average = sum / (float) ab.size();
+        
 
-        ellipse(width / 2, 100, average,  average);
+        ellipse(width / 2, 100, average * 100, average * 100);
     }   
 }
