@@ -86,30 +86,17 @@ public class Main
         processing.core.PApplet.runSketch( a, new Gantt());
     }
 
-<<<<<<< HEAD
-    public void helloProcessing2()
-    {
-        String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new HelloProcessing2());
-=======
     public void audio1()
     {
         String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new Audio1());
->>>>>>> ef5d2d9aaf31bf6ddad4c17db92d7b16b3b68d4d
     }
 
     public static void main(String[] args)
     {
         Main main = new Main();
-<<<<<<< HEAD
-<<<<<<< HEAD
-        main.helloProcessing2();
-=======
-        main.gantt();
->>>>>>> 503a5fef52173427dd9026ed86e7444486784732
-=======
+        //main.helloProcessing2();
+        //main.gantt();
         main.audio1();
->>>>>>> ef5d2d9aaf31bf6ddad4c17db92d7b16b3b68d4d
     }
 } 
