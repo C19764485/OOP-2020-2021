@@ -16,14 +16,22 @@ public class Audio1 extends PApplet {
     float[] lerpedBuffer;
 
     public void settings() {
-        size(512, 512);
+        size(900, 900);
         // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
     float lerpedY = y;
-
+    int colArrayCounter;
     int which = 0;
+    int[] colArray = {
+        color(25, 165, 190),
+        color(95, 170, 200),
+        color(120, 190, 210),
+        color(170, 210, 230),
+        color(205, 225, 245),
+        color(220, 240, 250)
+    };
 
     public void setup() {
         minim = new Minim(this);
@@ -33,11 +41,11 @@ public class Audio1 extends PApplet {
         ab = ap.mix; // Connect the buffer to the mp3 file
         colorMode(HSB);
         lerpedBuffer = new float[width];
-
+        mouseX = 10;
     }
 
     public void keyPressed() {
-        if (keyCode >= '0' && keyCode <= '5') {
+        if (keyCode >= '0' && keyCode <= '6') {
             which = keyCode - '0';
         }
         if (keyCode == ' ') {
@@ -154,16 +162,33 @@ public class Audio1 extends PApplet {
             }
             case 5:
             {
-                for (int i = 0; i < ab.size(); i++) 
-                {                    
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);        
-                    ellipse(width / 2, height /2, 50 + lerpedBuffer[i] * 1200, 50 + lerpedBuffer[i] * 1200);
-                }                
+                translate(width / 2, height / 2);
+                float rStep = 30;
+                float rMax = 400;
+                float rMin = mouseX;
+                
+                for (float r = rMin; r < rMax; r+=rStep)
+                {
+                    float c = 2*PI*r;
+                    float cSegement = map(r, 0, rMax, rStep*3/4, rStep/2);
+                    float aSegement = floor(c/cSegement);
+                    float ellipseSize = map(r, 0, rMax, rStep*3/4-1, rStep/4);
+                    for (int i = 0; i < 360; i+=360/aSegement) 
+                    {                  
+                        noStroke();
+                        colArrayCounter++;
+                        if(colArrayCounter > 5) colArrayCounter = 0;
+                        fill(colArray[colArrayCounter]);
+                        pushMatrix();
+                        rotate(radians(i));
+                        ellipse(r, 0, ellipseSize, ellipseSize);
+                        popMatrix();
+                    }         
+                }
+                       
                 break;
             }
-            case 7:
+            case 6:
             {
                 float r = 1f;
                 int numPoints = 5;
