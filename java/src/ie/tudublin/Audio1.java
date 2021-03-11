@@ -133,7 +133,8 @@ public class Audio1 extends PApplet {
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
                     noFill();
-                    ellipse(width / 2, height / 2, average * 700, average * 700);
+                    // ellipse(300, lerpedY, 30, 30);
+                    ellipse(width / 2, height /2, 50 + (lerpedAverage * 1200), 50 + (lerpedAverage * 1200));
                 }
                 break;
             }
@@ -143,8 +144,11 @@ public class Audio1 extends PApplet {
                 {                    
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
+                    strokeWeight(2);
                     noFill();
-                    rect(height / 2, width / 2, average * 700, average * 700);
+                    rectMode(CENTER);
+                    float size = 50 + (lerpedAverage * 1200);
+                    rect(height / 2, width / 2, size, size);
                 }
                 break;
             }
@@ -155,12 +159,32 @@ public class Audio1 extends PApplet {
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
                     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);        
-                    line(i, 2 * lerpedBuffer[i] * halfHeight * 2, i, 2 * lerpedBuffer[i] * halfHeight * 2);
-                    line(height + lerpedBuffer[i] * height * 2, height - lerpedBuffer[i] * height * 2, i, i);
-                    noFill();
-                    stroke(c, 255, 255);
-                    ellipse(i, width/2 - lerpedBuffer[i] * height * 2, halfHeight - lerpedBuffer[i] * height * 2, i);
+                    ellipse(width / 2, height /2, 50 + lerpedBuffer[i] * 1200, 50 + lerpedBuffer[i] * 1200);
                 }                
+                break;
+            }
+            case 7:
+            {
+                float r = 1f;
+                int numPoints = 5;
+                float thetaInc = TWO_PI / (float) numPoints;
+                strokeWeight(2);
+                stroke(255);
+                float lastX = width / 2, lastY = height /2 ;
+                for(int i = 0; i < 1000; i++)            
+                {
+                    float c = map(i, 0, 300, 0, 255) % 255.0f;
+                    stroke(c, 255, 255);
+                    // lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);        
+                    float theta = i * (thetaInc * lerpedAverage * 5);
+                    float x = width / 2 + sin(theta) * r;
+                    float y = height / 2 - cos(theta) * r;
+                    r += 0.5f + lerpedAverage;
+                    // point(x, y);         
+                    line(lastX, lastY, x, y);
+                    lastX = x;
+                    lastY = y;
+                }
                 break;
             }
         }        
